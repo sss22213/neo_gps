@@ -40,8 +40,9 @@ void split_comm(char* data, char** output)
         // bzero(*ptr_output,100);
         if(!strlen(ptr_s))memcpy(*ptr_output,"Z",2);
         else memcpy(*ptr_output,ptr_s,strlen(ptr_s));
-        printf("STX %s %s ETX\n",ptr_s,*ptr_output);
+        // printf("STX %s %s ETX\n",ptr_s,*ptr_output);
         ptr_output++;
+        printf("STX %p %p ETX\n",ptr_s,*ptr_output);
         ptr_s = end + 1;
     }
 }
@@ -78,7 +79,9 @@ void gps_read(neo_gps* gps_device)
             for(int idx = 0; idx < 100; idx++)
             {
                 *(analysis_result + idx) = (char*)calloc(sizeof(char),100);
+                printf("STX %p ETX\n",*(analysis_result + idx));
             }
+            printf("\n");
             split_comm(ptr_GPGGA, analysis_result);
             free(analysis_result);
         }
