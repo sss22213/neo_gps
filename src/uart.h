@@ -37,4 +37,5 @@ int uart_read(uart_structure*,uint8_t*);
 int uart_readnbytes(uart_structure*, uint8_t*, uint8_t);
 int uart_write(uart_structure*,uint8_t);
 int uart_writenbyte(uart_structure*,uint8_t*,uint8_t);
+int uart_readline(uart_structure*, uint8_t*, uint8_t);
 #endif

@@ -4,6 +4,6 @@ int main()
 {
     neo_gps *gps_device = new_neo_gps("/dev/ttyACM0");
     int open_result = gps_open(gps_device);
-    
+    gps_read(gps_device);
     return 0;
 }

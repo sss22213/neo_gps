@@ -1,6 +1,8 @@
 #ifndef __neo__gps__h__
 #define __neo__gps__h__
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 #include "uart.h"
 
 typedef struct neo_gps neo_gps;

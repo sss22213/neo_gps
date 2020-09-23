@@ -80,6 +80,22 @@ int uart_readnbytes(uart_structure* uart_device, uint8_t* data, uint8_t data_len
     return bytes_read;
 }
 
+int uart_readline(uart_structure* uart_device, uint8_t* data, uint8_t data_length)
+{
+    tcflush(uart_device->fd, TCIFLUSH);
+    // 
+    uint8_t *data_tmp = (uint8_t*)calloc(sizeof(uint8_t),data_length);
+    int bytes_read = read(uart_device->fd, data_tmp, data_length);
+    // uint8_t *ptr_data = data_tmp;
+    while(*data_tmp != '\n')
+    {
+        *data = *data_tmp;
+        data_tmp++;
+        data++;
+    }
+    return bytes_read;
+}
+
 int uart_write(uart_structure* uart_device,uint8_t data)
 {
     int bytes_written = write(uart_device->fd, &data,1);
