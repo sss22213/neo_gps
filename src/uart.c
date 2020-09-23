@@ -86,7 +86,6 @@ int uart_readline(uart_structure* uart_device, uint8_t* data, uint8_t data_lengt
     // 
     uint8_t *data_tmp = (uint8_t*)calloc(sizeof(uint8_t),data_length);
     int bytes_read = read(uart_device->fd, data_tmp, data_length);
-    // uint8_t *ptr_data = data_tmp;
     while(*data_tmp != '\n')
     {
         *data = *data_tmp;
@@ -107,23 +106,3 @@ int uart_writenbyte(uart_structure* uart_device, uint8_t* data, uint8_t data_len
     int bytes_written = write(uart_device->fd, &data, data_length);
     return bytes_written;
 }
-
-/*
-int main()
-{
-    uart_structure* uart_device = new_uart_device("/dev/ttyACM0",B9600,PARITY_NONE,STOP_BITS_ONE,DATA_LENGTH_EIGHT);
-    uart_open(uart_device);
-    uint8_t data[50];
-    while(1)
-    {
-        uart_readnbytes(uart_device, data, 50);
-        for(int idx = 0; idx < 50; idx++)
-        {
-            printf("%c",data[idx]);
-        }
-        printf("\n");
-        delay_ms(1000);
-    }
-    return 0;
-}
-*/
