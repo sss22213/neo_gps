@@ -7,22 +7,28 @@
 
 typedef struct neo_gps neo_gps;
 typedef struct location location;
+typedef struct c_string c_string;
 
 typedef struct location
 {
-    int latitude_direction;
-    int latitude;
-    int longitude_direction;
-    int longitude;
+    char *latitude_direction;
+    float latitude;
+    char *longitude_direction;
+    float longitude;
 }location;
 
 typedef struct neo_gps
 {
-    long utc_time;
+    char utc_time[100];
     int gps_status;
     location gps_loc;
     uart_structure *device;
 }neo_gps;
+
+typedef struct c_string
+{
+    char string[100];
+}c_string;
 
 neo_gps *new_neo_gps(char*);
 int gps_open(neo_gps*);

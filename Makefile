@@ -9,7 +9,7 @@ DEBUGGER = gdb -q
 all: clean neo_gps.o uart.o main
 
 main:
-	$(CC) -g -o ${BUILDDIR}/main ${SOURCEDIR}/neo_gps.h ${SOURCEDIR}/uart.h ${BUILDDIR}/neo_gps.o ${BUILDDIR}/uart.o ${SOURCEDIR}/main.c
+	$(CC) -Wall -g -o ${BUILDDIR}/main ${SOURCEDIR}/neo_gps.h ${SOURCEDIR}/uart.h ${BUILDDIR}/neo_gps.o ${BUILDDIR}/uart.o ${SOURCEDIR}/main.c
 
 neo_gps.o:
 	$(CC) -o ${BUILDDIR}/neo_gps.o -c ${SOURCEDIR}/neo_gps.c
