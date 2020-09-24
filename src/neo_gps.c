@@ -41,16 +41,18 @@ void gps_read(neo_gps* gps_device)
     //
     int gpgga_exist = 0;
     int gprmc_exist = 0;
-  
+    // buffer
+    c_string string_array[100];
     while( !gpgga_exist && !gprmc_exist )
     {
         // int byte_read = uart_readline(gps_device->device, data_buffer, 70);
         int byte_read = uart_readline(gps_device->device, data_buffer, 70);
         char *ptr_GPGGA = strstr(data_buffer,"$GPGGA");
         char *ptr_GPRMC = strstr(data_buffer,"$GPRMC");
+        bzero(string_array, 100);
         if(ptr_GPGGA)
         {
-            c_string string_array[100];
+            
             split_comm(ptr_GPGGA, string_array);
             memcpy(gps_device->gps_loc.latitude_direction, string_array[2].string, sizeof(string_array[2].string));
             gps_device->gps_loc.latitude = atof(string_array[3].string);
@@ -62,8 +64,8 @@ void gps_read(neo_gps* gps_device)
         {
             // printf("%s\n",ptr_GPRMC);
             c_string string_array_GPRMC[100];
-            split_comm(ptr_GPRMC, string_array_GPRMC);
-            if(string_array_GPRMC[2].string[0] != 'V')gps_device->gps_status = 1;
+            split_comm(ptr_GPRMC, string_array);
+            if(string_array[2].string[0] != 'V')gps_device->gps_status = 1;
             else gps_device->gps_status = 0;
             gprmc_exist= 1;
         }
