@@ -56,6 +56,7 @@ void gps_read(neo_gps* gps_device)
             gps_device->gps_loc.latitude = atof(string_array[3].string);
             memcpy(gps_device->gps_loc.longitude_direction, string_array[4].string, sizeof(string_array[5].string));
             gps_device->gps_loc.longitude = atof(string_array[5].string);
+            gpgga_exist = 1;
         }
         else if(ptr_GPRMC)
         {
@@ -64,6 +65,7 @@ void gps_read(neo_gps* gps_device)
             split_comm(ptr_GPRMC, string_array_GPRMC);
             if(string_array_GPRMC[2].string[0] != 'V')gps_device->gps_status = 1;
             else gps_device->gps_status = 0;
+            gprmc_exist= 1;
         }
     }
 }
